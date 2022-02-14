@@ -1,0 +1,20 @@
+Reverse a String :
+You are given a string s. You need to reverse the string.
+Input:
+s = Geeks
+Output: skeeG
+
+Approach:
+Using two pinter approach, One poinitng to the start of the array and other pointing to the end of the array.
+Keep swapping and incrementing both of them till start crosses or becomes equal to end.
+
+Code:
+string reverseWord(string str){
+  int s=0;
+  int len=str.length();
+  int e=len-1;
+  while(s<=e){
+      swap(str[s++],str[e--]);
+  }
+  return str;
+}
