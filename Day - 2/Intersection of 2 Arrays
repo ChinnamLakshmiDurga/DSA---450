@@ -1,0 +1,57 @@
+Given two unsorted arrays(elements in every array may not be distinct), find the intersection of two arrays.
+
+Example: 
+Input:
+a = {1,2,4,3,9,1,4}
+b = {4,6,2,9,4,2}
+Output:
+2 4 9
+
+Approach:
+1. Since the arrays are not sorted so first sort both of them using the STL sort().
+2. Use two pointer approach to traverse through the arrays.
+3. Using SET for the output since SET takes only distinct elements so we print the intersecction elements that are distinct excluding the duplicates.
+4. Whenver we encounter same elements in both the arrays while traversing, we insert into the set.
+5. Print the SET elements when we are done traversing.
+
+Code:
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<set>
+using namespace std;
+
+void intersect(vector<int> first, vector<int> second){
+    int l1=first.size();
+    int l2=second.size();
+
+    int i=0;
+    int j=0;
+
+    set<int> s;
+
+    while(i<l1 && j<l2){
+        if(first[i]==second[j]){
+            s.insert(first[i]);
+            i++; j++;  
+        }
+        else if(second[j]>=first[i]){
+            i++;
+        }
+        else{
+            j++;
+        }
+    }
+    for (auto i = s.begin(); i != s.end(); i++)
+        cout << *i << " ";
+}
+ int main(){
+    vector<int> a{1,2,4,3,9,1,4};
+    vector<int> b{4,6,2,9,4,2};
+
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
+
+    intersect(a,b);
+    return 0;
+}
