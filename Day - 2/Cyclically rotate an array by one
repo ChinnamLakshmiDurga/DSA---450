@@ -1,0 +1,43 @@
+Cyclically rotate an array by one :
+
+Given an array, rotate the array by one position in clock-wise direction.
+
+Example 1:
+Input:
+N = 5
+A[] = {1, 2, 3, 4, 5}
+Output:
+5 1 2 3 4
+
+Approach-1:
+1. Since the last element should be at the first place so save the last element into a variable.
+2. Start from the last element and the update it to be its previous element.
+3. Continue step-2 till the loop reaches the first index.
+4. Since at the 0th index, the last element should be present so update last element seperately to the value that is saved in the first step.
+
+Code:
+void rotate(int arr[], int n)
+{
+    int x=arr[n-1];
+    for(int i=n-1;i>0;i--){
+        arr[i]=arr[i-1];
+    }  
+    arr[0]=x;
+    
+}
+
+
+Approach-2: 2 pointer Approach
+1. Initialize i and j where i points to 0 index and j points to last index.
+2. While i is not equal to j, keep swapping arr[i] and arr[j]]
+3. And only increment the 'i' value.
+
+Code:
+void rotate(int arr[], int n)
+{
+    int i=0;int j=n-1;
+    while(i!=j){
+        swap(arr[i],arr[j]);
+        i++;
+    }
+}
