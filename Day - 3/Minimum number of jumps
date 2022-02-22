@@ -1,0 +1,87 @@
+Minimum Number of jumps :
+Given an array of N integers arr[] where each element represents the max number of steps that can be made forward from that element. Find the minimum number of jumps to reach the end of the array (starting from the first element). If an element is 0, then you cannot move through that element.
+Note: Return -1 if you can't reach the end of the array.
+
+Example 1:
+
+Input:
+N = 11 
+arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9} 
+Output: 3 
+Explanation: 
+First jump from 1st element to 2nd element with value 3. Now, from here we jump to 5th element with value 9, and from here we will jump to last. 
+
+Example 2:
+Input :
+N = 6
+arr = {1, 4, 3, 2, 6, 7}
+Output: 2 
+Explanation: 
+First we jump from the 1st to 2nd element and then jump to the last element.
+
+Approach :
+EDGE CASE-
+   I. If number of elements are lesser than equal to 1 then there is only one element or less so number of jumps is 0. So, return 0.
+  II. If the first element is 0 then we can't move further in the array so then there is no possible path indicating -1. So, return -1.
+1. Initially we need 3 variables:
+     i. steps : Number of steps it can move in each jump.
+    ii. mx    : Since We need to find the minimun number of jumps required to reach the last element.So, we need to keep track and update the maxmium distance in one jump. 
+   iii. jump  : Number of jumps required to reach the last element. 
+2. At first, Initialize the mx, steps as arr[0] and jumps as 1.
+3. Start traverseing through the array from i=1 to n-1:
+   a. Check if i has reached the last element i.e., (i==n-1) and if it turns true then return jumps.
+   b. Update mx with maximum of previous mx and current index+it's value i.e., i+arr[i].(Since we need to reduce the number of jumps so maximizing the distance in each jump).
+   c. Reduce the step value since we have taken a step.
+   d. Check if all the steps have been used i.e., if step==0 then 
+      i. We need to make a jump since we have no steps left i.e., jump++
+     ii. Check if i>=mx then return -1.(EDGE CASE)
+    iii. Update the steps value to be mx-i.
+4. If any of the above is not possible then path is not possible so return -1.
+
+Code:
+int minJumps(int arr[], int n){
+        
+        //If only one element or less.
+        if(n<=1){
+            return 0;
+        }
+        
+        //If the first element is not accessible.
+        if(arr[0]==0){
+            return -1;
+        }
+        
+        //Initial stage
+        int mx=arr[0];
+        int step=arr[0];
+        int jump=1;
+        for(int i=1;i<n;i++){
+        
+           //If it has reached the end
+            if(i==n-1){
+                return jump;
+            }
+            
+            //Update the mx to be the maximum value of the possibilities in the current jump
+            mx=max(mx,arr[i]+i);
+            
+            //Reduce the step value since we took a step
+            step--;
+            
+            //If steps are over in the curent jump.
+            if(step==0){
+                //Make a jump
+                jump++;
+                
+                if(i>=mx){
+                    return -1;
+                }
+                
+                //Update steps
+                step=mx-i;
+            }
+            
+        }
+        
+        return -1;
+    }
