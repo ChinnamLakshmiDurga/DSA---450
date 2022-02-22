@@ -3,9 +3,6 @@ Given an array arr[] denoting heights of N towers and a positive integer K, you 
 Find out what could be the possible minimum difference of the height of shortest and longest towers after you have modified each tower.
 Note: Assume that height of the tower can be negative.
 
-ight modification of the problem can be found here. 
-
-
 Example 1:
 Input:
 K = 2, N = 4
